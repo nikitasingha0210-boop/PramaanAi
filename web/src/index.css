@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   PramaanAI design tokens — Premium Government-Tech / Enterprise theme
+   Warm ivory + beige surfaces, deep burgundy primary, muted sage secondary.
+   All component files reference these token NAMES only (bg-ink-950,
+   text-mist-100, bg-seal-500, etc). To re-theme the entire app, change
+   values here — never hardcode a color in a component.
+   ========================================================================= */
+@theme {
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Base surfaces — warm ivory / cream / sand (was deep navy).
+     Token names kept for compatibility; darkest-to-lightest ordering is
+     now inverted in meaning (950 = lightest surface, 500 = deepest border). */
+  --color-ink-950: #F7F5F0;   /* page background — warm ivory */
+  --color-ink-900: #FFFFFF;   /* input / topbar surfaces — warm white */
+  --color-ink-850: #FFFFFF;   /* card surfaces — warm white */
+  --color-ink-800: #F3EFE7;   /* raised / hover surfaces — cream */
+  --color-ink-700: #E5DED2;   /* borders — sand */
+  --color-ink-600: #DDD4C7;   /* stronger borders, scrollbar thumb — soft beige */
+  --color-ink-500: #C9BFAE;   /* muted borders — deeper beige */
+
+  /* Text — dark charcoal on warm ivory (was light text on dark).
+     Full ramp defined (100 darkest -> 700 faintest) so every shade any
+     component references actually resolves to a real color. */
+  --color-mist-100: #343331;  /* primary text — dark charcoal */
+  --color-mist-200: #4A4744;  /* strong secondary text / list titles */
+  --color-mist-300: #5C5852;  /* secondary text */
+  --color-mist-400: #756F67;  /* tertiary text / icons */
+  --color-mist-500: #8B8780;  /* muted text — warm gray */
+  --color-mist-600: #A6A198;  /* placeholder / very muted text */
+  --color-mist-700: #BFBAB0;  /* faintest — timestamps, disabled */
+
+  /* Primary brand accent — deep burgundy / wine.
+     Evidence / certification metaphor, professional government-tech tone. */
+  --color-seal-300: #9C6670;
+  --color-seal-400: #8B5560;
+  --color-seal-500: #7A3E48;
+  --color-seal-600: #5F2F38;
+
+  /* Secondary accent — muted slate blue. Used for interactive/info elements
+     (links, focus rings, in-progress states) — never neon. */
+  --color-verify-300: #96A5B5;
+  --color-verify-400: #75879C;
+  --color-verify-500: #64758A;
+  --color-verify-600: #4F5F72;
+
+  /* Status — muted, desaturated; never fluorescent.
+     danger-300 is used for high-emphasis critical text (e.g. the
+     "NOT QUALIFIED" banner) so it is the deepest, not the lightest. */
+  --color-success-400: #4C6B50;
+  --color-success-500: #58745B;
+  --color-warning-400: #A97438;
+  --color-warning-500: #B18445;
+  --color-danger-300: #7D3535;
+  --color-danger-400: #954848;
+  --color-danger-500: #A65454;
+}
+
+html, body {
+  background: var(--color-ink-950);
+  color: var(--color-mist-100);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-600) transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--color-ink-600); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+:focus-visible {
+  outline: 2px solid var(--color-verify-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ambient grid texture used behind the login composition and empty states.
+   Faint warm charcoal hairlines on ivory — a paper/ledger texture rather
+   than a "hologram grid". */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(52,51,49,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52,51,49,0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.font-tabular { font-variant-numeric: tabular-nums; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise-in {
+  animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -10px); }
+}
+.animate-drift { animation: drift 9s ease-in-out infinite; }
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(122, 62, 72, 0.3); }
+  100% { box-shadow: 0 0 0 10px rgba(122, 62, 72, 0); }
+}
+.animate-pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
